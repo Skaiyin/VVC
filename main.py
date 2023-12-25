@@ -25,7 +25,8 @@ last_end = 0
 
 for start, end, segment in audio_segments:
     # 计算每个片段前的静音长度（如果有）
-    silence_duration = start - last_end
+    current_length = len(final_audio) / model.fs * 1000
+    silence_duration = start - current_length
     # print(silence_duration)
     if silence_duration > 0:
         final_audio = np.concatenate((final_audio, get_silence(silence_duration, model.fs)),axis=0)
